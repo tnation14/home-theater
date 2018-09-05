@@ -117,6 +117,22 @@ services:
       - ${MOUNT_POINT}/plex-config:/config
       - ${MOUNT_POINT}/plex:/data
       - /tmp/plex-transcode:/transcode
+  lidarr:
+    image: linuxserver/lidarr
+    container_name: lidarr
+    restart: always
+    ports:
+            - "8686:8686"
+    networks:
+      - plexnet
+    environment:
+      - PGID=1000
+      - PUID=1000
+      - TZ=Europe/London
+    volumes:
+      - ${MOUNT_POINT}/lidarr-config:/config
+      - ${MOUNT_POINT}/transmission/completed:/downloads
+      - ${MOUNT_POINT}/plex/music:/music
 networks:
   plexnet:
     ipam:
